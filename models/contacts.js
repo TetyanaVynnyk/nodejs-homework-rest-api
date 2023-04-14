@@ -18,6 +18,11 @@ const contactSchema = new Schema({
       type: Boolean,
       default: false,
     },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+  },
   }, {versionKey: false, timestamps: false});
 
 contactSchema.post("save", handleMongooseError);
@@ -29,14 +34,14 @@ const addSchema = Joi.object({
       "string.base": `"name" must be string`,
     }),
     email: Joi.string().required().messages({
-      "any.required": `"name" is required`,
-      "string.empty": `"name" cannot be empty`,
-      "string.base": `"name" must be string`,
+      "any.required": `"email" is required`,
+      "string.empty": `"email" cannot be empty`,
+      "string.base": `"email" must be string`,
     }),
     phone: Joi.string().required().messages({
-      "any.required": `"name" is required`,
-      "string.empty": `"name" cannot be empty`,
-      "string.base": `"name" must be string`,
+      "any.required": `"phone" is required`,
+      "string.empty": `"phone" cannot be empty`,
+      "string.base": `"phone" must be string`,
     }),
     // Joi.string().pattern(//)
   });
